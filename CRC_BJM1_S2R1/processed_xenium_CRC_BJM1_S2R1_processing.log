@@ -1,0 +1,87 @@
+2025-04-18 17:12:33,256 - INFO - Starting Xenium data preprocessing pipeline.
+2025-04-18 17:12:33,261 - INFO - Output prefix set to: processed_xenium_CRC_BJM1_S2R1
+2025-04-18 17:12:33,264 - INFO - Sample ID set to: CRC_BJM1_S2R1
+2025-04-18 17:12:33,268 - INFO - --- Step 1: Loading Data ---
+2025-04-18 17:12:33,276 - INFO - Reading H5 file: /data/ARPAH/250210_CRC_BJM/output-XETG00274__0050585__Region_1__20250205__113422/cell_feature_matrix.h5
+2025-04-18 17:12:34,349 - INFO - Reading cells parquet file: /data/ARPAH/250210_CRC_BJM/output-XETG00274__0050585__Region_1__20250205__113422/cells.parquet
+2025-04-18 17:12:34,431 - INFO - Initial AnnData object shape: (67645, 5001)
+2025-04-18 17:12:34,435 - INFO - Available obs columns from H5: ['sample_id']
+2025-04-18 17:12:34,438 - INFO - Available var columns from H5: ['gene_ids', 'feature_types', 'genome']
+2025-04-18 17:12:34,441 - INFO - --- Step 2: Integrating Metadata ---
+2025-04-18 17:12:34,444 - INFO - Joining metadata from cells parquet file.
+2025-04-18 17:12:34,492 - INFO - Added columns from cells parquet: ['transcript_counts', 'total_counts', 'genomic_control_counts', 'unassigned_codeword_counts', 'deprecated_codeword_counts', 'nucleus_area', 'nucleus_count', 'y_centroid', 'x_centroid', 'cell_area', 'control_codeword_counts', 'segmentation_method', 'control_probe_counts']
+2025-04-18 17:12:34,496 - INFO - Populating adata.obsm['spatial'] using columns: 'x_centroid', 'y_centroid'
+2025-04-18 17:12:34,502 - INFO - Integrating core information from directory: /data/ARPAH/250210_CRC_BJM/cell_ID/slide2(0050585)_Region1
+2025-04-18 17:12:34,507 - INFO - Found 10 potential core info files.
+2025-04-18 17:12:34,554 - INFO - Found 8190 overlapping cells for Core 13 in 13_cells_stats.csv.
+2025-04-18 17:12:34,658 - INFO - Found 9085 overlapping cells for Core 14 in 14_cells_stats.csv.
+2025-04-18 17:12:34,722 - INFO - Found 2638 overlapping cells for Core 1 in 1_cells_stats.csv.
+2025-04-18 17:12:34,762 - INFO - Found 7281 overlapping cells for Core 25 in 25_cells_stats.csv.
+2025-04-18 17:12:34,822 - INFO - Found 6403 overlapping cells for Core 26 in 26_cells_stats.csv.
+2025-04-18 17:12:34,878 - INFO - Found 3737 overlapping cells for Core 2 in 2_cells_stats.csv.
+2025-04-18 17:12:34,921 - INFO - Found 6759 overlapping cells for Core 37 in 37_cells_stats.csv.
+2025-04-18 17:12:34,981 - INFO - Found 9320 overlapping cells for Core 38 in 38_cells_stats.csv.
+2025-04-18 17:12:35,050 - INFO - Found 6934 overlapping cells for Core 49 in 49_cells_stats.csv.
+2025-04-18 17:12:35,108 - INFO - Found 7201 overlapping cells for Core 50 in 50_cells_stats.csv.
+2025-04-18 17:12:35,153 - INFO - Assigned Core IDs to 67548/67645 cells.
+2025-04-18 17:12:35,158 - INFO - Core value counts:
+Core
+38      9320
+14      9085
+13      8190
+25      7281
+50      7201
+49      6934
+37      6759
+26      6403
+2       3737
+1       2638
+<NA>      97
+Name: count, dtype: int64
+2025-04-18 17:12:35,161 - INFO - --- Step 3: Calculating QC Metrics ---
+2025-04-18 17:12:35,173 - INFO - Identified 0 mitochondrial genes.
+2025-04-18 17:12:35,177 - INFO - Identified 1 ribosomal genes.
+2025-04-18 17:12:35,180 - INFO - Identified 4 hemoglobin genes.
+2025-04-18 17:12:35,395 - INFO - QC metrics calculated. Summary (before filtering): {'n_cells': 67645, 'n_genes': 5001, 'median_total_counts': 246.0, 'mean_total_counts': 329.0464782714844, 'median_n_genes_by_counts': 206.0, 'mean_n_genes_by_counts': 247.12465075024022, 'median_pct_counts_mt': 0.0, 'mean_pct_counts_mt': 0.0}
+2025-04-18 17:12:36,761 - INFO - Saved QC violin plot (before filtering) to: processed_xenium_CRC_BJM1_S2R1_qc_violin_before_filter.png
+2025-04-18 17:12:36,765 - INFO - --- Step 4: QC Filtering (Optional) ---
+2025-04-18 17:12:36,768 - INFO - Applying QC filters with parameters: min_counts=10, max_counts=None, min_genes=3, max_genes=None, min_cells=3, max_pct_mito=20.0
+2025-04-18 17:12:37,297 - INFO - Filtered genes: 1 genes removed (< 3 cells).
+2025-04-18 17:12:37,424 - INFO - Cells to remove based on min_genes (3): 208
+2025-04-18 17:12:37,438 - INFO - Cells to remove based on min_counts (10): 593
+2025-04-18 17:12:37,443 - INFO - Cells to remove based on max_pct_mito (20.0%): 0
+2025-04-18 17:12:37,688 - INFO - Filtered cells: 593 cells removed based on combined criteria.
+2025-04-18 17:12:37,692 - INFO - AnnData shape after QC filtering: (67052, 5000)
+2025-04-18 17:12:39,056 - INFO - Saved QC violin plot (after filtering) to: processed_xenium_CRC_BJM1_S2R1_qc_violin_after_filter.png
+2025-04-18 17:12:39,058 - INFO - Preparing .raw attribute with log-normalized data.
+2025-04-18 17:12:39,255 - INFO - Saved log-normalized data to adata.raw
+2025-04-18 17:12:39,258 - INFO - --- Step 5: Normalization & HVG Selection (lognorm) ---
+2025-04-18 17:12:39,261 - INFO - Applying LogNormalize: target_sum=10000.0
+2025-04-18 17:12:39,383 - INFO - Applying log1p transformation.
+2025-04-18 17:12:39,459 - INFO - Finding Highly Variable Genes (HVGs) using Scanpy method.
+2025-04-18 17:12:40,107 - INFO - Found 2000 HVGs using parameters: {'min_mean': 0.0125, 'max_mean': 3, 'min_disp': 0.5, 'flavor': 'seurat_v3'}
+2025-04-18 17:12:40,117 - WARNING - Could not generate HVG scatter plot: highly_variable_genes() got an unexpected keyword argument 'ax'
+2025-04-18 17:12:40,120 - INFO - --- Step 6: Scaling Data ---
+2025-04-18 17:12:40,124 - INFO - Scaling data to zero mean and unit variance (max_value=10).
+2025-04-18 17:12:43,150 - INFO - Applied scaling to HVGs. adata.X now contains scaled log-normalized counts for HVGs.
+2025-04-18 17:12:43,153 - INFO - --- Step 7: Dimensionality Reduction (PCA) ---
+2025-04-18 17:12:43,157 - INFO - Running PCA with parameters: {'n_comps': 50, 'svd_solver': 'arpack', 'random_state': 0}
+2025-04-18 17:12:49,606 - INFO - PCA performed on scaled log-normalized HVG data.
+2025-04-18 17:12:49,621 - WARNING - Could not generate PCA variance ratio plot: pca_variance_ratio() got an unexpected keyword argument 'ax'
+2025-04-18 17:12:49,625 - INFO - --- Step 8: Building Neighborhood Graph ---
+2025-04-18 17:12:49,628 - INFO - Building KNN graph using parameters: {'n_neighbors': 15, 'n_pcs': 40, 'use_rep': 'X_pca', 'random_state': 0}
+2025-04-18 17:12:57,007 - INFO - --- Step 9: Clustering ---
+2025-04-18 17:12:57,012 - INFO - Running leiden clustering with parameters: {'resolution': 0.8, 'key_added': 'clusters_leiden_res0.8', 'random_state': 0}
+2025-04-18 17:14:28,073 - INFO - Found 20 clusters using leiden (resolution=0.8). Results stored in adata.obs['clusters_leiden_res0.8'].
+2025-04-18 17:14:28,080 - INFO - --- Step 10: Visualization (UMAP) ---
+2025-04-18 17:14:28,084 - INFO - Running UMAP with parameters: {'min_dist': 0.5, 'spread': 1.0, 'random_state': 0}
+2025-04-18 17:15:08,926 - INFO - Saved UMAP plot colored by 'clusters_leiden_res0.8' to: processed_xenium_CRC_BJM1_S2R1_umap_clusters_leiden_res0.8.png
+2025-04-18 17:15:14,687 - INFO - Saved spatial plot colored by 'clusters_leiden_res0.8' to: processed_xenium_CRC_BJM1_S2R1_spatial_clusters_leiden_res0.8.png
+2025-04-18 17:15:14,689 - INFO - --- Step 11: Finding Marker Genes ---
+2025-04-18 17:15:14,691 - INFO - Running rank_genes_groups with parameters: {'groupby': 'clusters_leiden_res0.8', 'method': 'wilcoxon', 'key_added': 'clusters_leiden_res0.8_rank_genes_wilcoxon', 'use_raw': True, 'pts': True, 'n_genes': -1}
+2025-04-18 17:16:30,556 - INFO - Marker gene analysis completed. Results stored in adata.uns['clusters_leiden_res0.8_rank_genes_wilcoxon'].
+2025-04-18 17:16:32,496 - INFO - Saved rank_genes_groups plot to: processed_xenium_CRC_BJM1_S2R1_rank_genes_clusters_leiden_res0.8.png
+2025-04-18 17:16:32,500 - INFO - --- Step 12: Saving Results ---
+2025-04-18 17:16:32,508 - INFO - Final QC Summary: {'n_cells': 67052, 'n_genes': 2000, 'median_total_counts': 248.0, 'mean_total_counts': 331.9176330566406, 'median_n_genes_by_counts': 208.0, 'mean_n_genes_by_counts': 249.2720724214043, 'median_pct_counts_mt': 0.0, 'mean_pct_counts_mt': 0.0}
+2025-04-18 17:16:38,375 - ERROR - Failed to save AnnData object: Can't implicitly convert non-string objects to strings
+2025-04-18 17:16:38,381 - INFO - Preprocessing pipeline finished.
